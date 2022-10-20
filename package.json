@@ -1,0 +1,31 @@
+{
+  "name": "currency_converter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "next": "12.3.1",
+    "antd": "4.19.1",
+    "next-with-less": "2.0.5",
+    "react": "18.2.0",
+    "react-dom": "18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "18.11.3",
+    "@types/react": "18.0.21",
+    "@types/react-dom": "18.0.6",
+    "eslint": "8.18.0",
+    "eslint-config-airbnb-typescript": "16.1.1",
+    "eslint-config-prettier": "8.5.0",
+    "eslint-formatter-friendly": "7.0.0",
+    "eslint-plugin-css-modules": "^2.11.0",
+    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-jsx-a11y": "6.5.1",
+    "eslint-plugin-react": "7.29.3"
+  }
+}
