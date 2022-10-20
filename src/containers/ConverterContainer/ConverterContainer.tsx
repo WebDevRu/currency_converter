@@ -1,5 +1,9 @@
 import React from 'react';
 
+import { Typography, Divider } from 'antd';
+const { Title } = Typography;
+
+import { Converter } from 'components/Converter';
 import { NS_COMMON } from 'const/app/I18_NAMESPACES';
 import { useTranslation } from 'hooks/useTranslation';
 
@@ -10,7 +14,11 @@ const ConverterContainer: React.FC = () => {
 
     return (
         <div className={styles.cont}>
-            {t('test')}
+            <Title>
+                {t('pages.converter')}
+            </Title>
+            <Divider />
+            <Converter />
         </div>
     );
 };

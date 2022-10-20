@@ -4,6 +4,7 @@ const { i18n } = require('./next-i18next.config');
 
 const publicRuntimeConfig = {
   appEnv: process.env.APP_ENV,
+  openExchangeAppID: process.env.OPEN_EXCHANGE_APP_ID
 };
 
 
