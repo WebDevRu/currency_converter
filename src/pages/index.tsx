@@ -21,6 +21,7 @@ export const getServerSideProps = async ({ locale }: NextPageContext) => {
             ...(await serverSideTranslations(locale as string, [
                 NS_COMMON,
             ])),
+            locale,
         },
     });
 };
