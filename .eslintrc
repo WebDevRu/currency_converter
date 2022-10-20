@@ -39,6 +39,11 @@
   "settings": {
     "react": {
       "version": "detect"
+    },
+    "import/resolver": {
+      "node": {
+        "paths": ["src"]
+      }
     }
   },
   // Rule changes from Airbnb's eslint config
