@@ -10,4 +10,8 @@ export interface IConvertingState {
     isLoading: boolean,
     amount: number,
     convertFrom: BaseCurrencies,
+    rates: {
+        RUB: Record<string, number>,
+        USD: Record<string, number>
+    },
 }

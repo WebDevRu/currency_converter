@@ -10,12 +10,15 @@ export interface IAutoComplete {
     isValid: boolean,
     convertFrom?: BaseCurrencies,
     autoCompleteStrings: string[],
+    amount?: number,
 }
 
 export const getAutoCompleteList = ({ valueString }:{ valueString: string }):IAutoComplete => {
     const stringSplit = valueString.split(' ');
 
-    if (!isNumber(stringSplit[0])) {
+    const amount = stringSplit[0];
+
+    if (!isNumber(amount)) {
         return {
             isValid: false,
             autoCompleteStrings: [],
@@ -25,15 +28,14 @@ export const getAutoCompleteList = ({ valueString }:{ valueString: string }):IAu
     if (stringSplit.length <= 2 && !stringSplit[1]) {
         return {
             isValid: false,
-            autoCompleteStrings: createCompletes(stringSplit[0]),
+            autoCompleteStrings: createCompletes(amount),
         };
     }
     if (stringSplit.length >= 2 && stringSplit[1]) {
-        const testStrings = createCompletes(stringSplit[0]).map((s) => s.slice(0, valueString.length));
+        const testStrings = createCompletes(amount).map((s) => s.slice(0, valueString.length));
 
         const completeIndex = testStrings.findIndex((s) => s === valueString);
 
-        console.log(stringSplit);
         if (completeIndex === -1) {
             return  {
                 isValid: false,
@@ -42,16 +44,18 @@ export const getAutoCompleteList = ({ valueString }:{ valueString: string }):IAu
         }
         if (completeIndex === 0) {
             return  {
-                isValid: true,
-                autoCompleteStrings: [`${stringSplit[0]} ${CONVERTS_STRINGS[0]}`],
+                isValid: `${amount} ${CONVERTS_STRINGS[0]}` === valueString,
+                autoCompleteStrings: [`${amount} ${CONVERTS_STRINGS[0]}`],
                 convertFrom: BaseCurrencies.USD,
+                amount: +amount,
             };
         }
         if (completeIndex === 1) {
             return  {
-                isValid: true,
-                autoCompleteStrings: [`${stringSplit[0]} ${CONVERTS_STRINGS[1]}`],
+                isValid:`${amount} ${CONVERTS_STRINGS[1]}` === valueString,
+                autoCompleteStrings: [`${amount} ${CONVERTS_STRINGS[1]}`],
                 convertFrom: BaseCurrencies.Ruble,
+                amount: +amount,
             };
         }
     }

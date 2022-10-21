@@ -3,5 +3,7 @@
   "pages": {
     "converter": "Converter",
     "currenciesList": "Currencies list"
-  }
+  },
+  "enterCurrency": "Enter currency",
+  "validError": "Please enter valid string"
 }

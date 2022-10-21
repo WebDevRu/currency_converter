@@ -1,4 +1,4 @@
 export enum BaseCurrencies {
-    USD = 'UDS',
+    USD = 'USD',
     Ruble = 'RUB'
 }
