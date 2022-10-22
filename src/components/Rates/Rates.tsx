@@ -1,17 +1,16 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 
-import { Table, Select, Typography } from 'antd';
-
-const { Option } = Select;
-
-import { AppLanguages } from 'const/app/AppLanguages';
-import { NS_COMMON } from 'const/app/I18_NAMESPACES';
-import { BaseCurrencies } from 'const/converter/BaseCurrencies';
-import { useApp } from 'context/AppContext';
-import { useConverter } from 'context/ConverterContext';
-import { useTranslation } from 'hooks/useTranslation';
+import {Select, Table, Typography} from 'antd';
+import {AppLanguages} from 'const/app/AppLanguages';
+import {NS_COMMON} from 'const/app/I18_NAMESPACES';
+import {BaseCurrencies} from 'const/converter/BaseCurrencies';
+import {useApp} from 'context/AppContext';
+import {useConverter} from 'context/ConverterContext';
+import {useTranslation} from 'hooks/useTranslation';
 
 import styles from './Rates.module.less';
+
+const { Option } = Select;
 
 const Rates: React.FC = () => {
     const {
@@ -57,26 +56,28 @@ const Rates: React.FC = () => {
         const resultArr = [];
         const {
             list,
+            base,
         } = rates;
 
         const listCopy = { ...list };
 
-        if (listCopy[BaseCurrencies.USD]) {
-            resultArr.push({
-                currencyCode: BaseCurrencies.USD,
-                value: listCopy[BaseCurrencies.USD],
-            });
-
-            delete listCopy[BaseCurrencies.USD];
-        }
-
-        if (listCopy[BaseCurrencies.Ruble]) {
+        if (base === BaseCurrencies.USD) {
             resultArr.push({
                 currencyCode: BaseCurrencies.Ruble,
                 value: listCopy[BaseCurrencies.Ruble],
             });
 
             delete listCopy[BaseCurrencies.Ruble];
+            delete listCopy[BaseCurrencies.USD];
+        }
+
+        if (base === BaseCurrencies.Ruble) {
+            resultArr.push({
+                currencyCode: BaseCurrencies.USD,
+                value: listCopy[BaseCurrencies.USD],
+            });
+
+            delete listCopy[BaseCurrencies.USD];
         }
 
         for (const key in listCopy) {
@@ -87,7 +88,7 @@ const Rates: React.FC = () => {
         }
 
         return resultArr;
-    }, [rates.list]);
+    }, [rates]);
 
     const onBaseSelectChanged = (value:string) => {
         setRates({

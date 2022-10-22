@@ -1,4 +1,4 @@
-import { BaseCurrencies } from "../const/converter/BaseCurrencies";
+import { BaseCurrencies } from 'const/converter/BaseCurrencies';
 
 export interface IConvertBaseCurrency {
     amount: number,

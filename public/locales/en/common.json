@@ -5,7 +5,7 @@
     "currenciesRates": "Currencies rates"
   },
   "enterCurrency": "Enter currency",
-  "validError": "Please enter valid string",
+  "validError": "Please enter value",
   "currency": "Currency",
   "baseCurrency": "Base currency:"
 }
