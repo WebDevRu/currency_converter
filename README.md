@@ -1,6 +1,6 @@
 ## To run app:
 
-1) Install dependencies, for it tun in root folder:
+1) Install dependencies, for it run in root folder:
 ```bash
 npm install
 ```
