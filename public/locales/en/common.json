@@ -2,8 +2,10 @@
   "test": "sfgtrh",
   "pages": {
     "converter": "Converter",
-    "currenciesList": "Currencies list"
+    "currenciesRates": "Currencies rates"
   },
   "enterCurrency": "Enter currency",
-  "validError": "Please enter valid string"
+  "validError": "Please enter valid string",
+  "currency": "Currency",
+  "baseCurrency": "Base currency:"
 }

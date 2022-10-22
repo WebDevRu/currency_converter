@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useEffect, useState} from 'react';
 
 
 import { AutoComplete, Form, Typography, Spin } from 'antd';
@@ -52,6 +52,8 @@ const Converter: React.FC = () => {
         onCleanConvertingResult();
         setValidateStatus('success');
     };
+
+    useEffect(() => () => onCleanConvertingResult(), []);
 
     return (
         <div className={styles.cont}>

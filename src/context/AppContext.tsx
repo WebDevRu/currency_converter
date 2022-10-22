@@ -3,7 +3,10 @@ import React, {
     createContext,
     useContext,
     ReactElement,
+    useEffect,
 } from 'react';
+
+import { getUserLocale } from 'get-user-locale';
 
 import { IAppState } from 'types/app';
 
@@ -27,6 +30,22 @@ export const AppProvider = (props: PropsInterface) => {
         isInit: false,
         language: AppLanguages.English,
     });
+
+    useEffect(() => {
+        const myLanguage = getUserLocale();
+        const languageSplit = myLanguage.split('-');
+        if (languageSplit[0] === 'ru') {
+            setAppState({
+                isInit: true,
+                language: AppLanguages.Russian,
+            });
+        } else {
+            setAppState({
+                isInit: true,
+                language: AppLanguages.English,
+            });
+        }
+    }, []);
 
     return (
         <AppContext.Provider

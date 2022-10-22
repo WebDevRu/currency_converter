@@ -15,3 +15,7 @@ export interface IConvertingState {
         USD: Record<string, number>
     },
 }
+
+export interface ILoadCurrencyRates {
+    base: BaseCurrencies,
+}

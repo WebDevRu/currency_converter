@@ -1,11 +1,4 @@
-import React, {
-    createContext,
-    ReactElement,
-    useCallback,
-    useContext,
-    useEffect,
-    useState
-} from 'react';
+import React, { createContext, ReactElement, useCallback, useContext, useEffect, useState } from 'react';
 
 import { publicConfig } from 'configs/publicConfig';
 import { BaseCurrencies } from 'const/converter/BaseCurrencies';
@@ -14,12 +7,13 @@ import { OPEN_EXC_LATEST_API } from 'const/externalServices/OPEN_EXCHAGES_API_UR
 import { RequestMethods, RequestStatuses } from 'const/http';
 import { useRequest } from 'hooks/useRequest';
 import { ILatestRatesResponse } from 'types/app';
-import { IConvertBaseCurrency, IConvertingState } from 'types/converter';
+import { IConvertBaseCurrency, IConvertingState, ILoadCurrencyRates } from 'types/converter';
 
 interface IContext {
     convertingState: IConvertingState,
     onConvertBaseCurrency: (data:IConvertBaseCurrency) => void,
     onCleanConvertingResult: () => void,
+    onLoadCurrencyRates: (data:ILoadCurrencyRates) => void,
 }
 
 const ConverterContext = createContext({} as IContext);
@@ -95,6 +89,19 @@ export const ConverterProvider = (props: PropsInterface) => {
         }));
     }, []);
 
+    const onLoadCurrencyRates = useCallback((data:ILoadCurrencyRates) => {
+        if (data.base === BaseCurrencies.USD){
+            onGetOpenExchangeLatestRequest({
+                params: {
+                    base: data.base,
+                    app_id: publicConfig.openExchangeAppID,
+                },
+            });
+        } else {
+            onGetCBRULatestRequest();
+        }
+    }, []);
+
     useEffect(() => {
         const {
             status,
@@ -108,7 +115,7 @@ export const ConverterProvider = (props: PropsInterface) => {
 
         if (status === RequestStatuses.Succeeded) {
             setConvertingState((c) => {
-                if (requestData.isConvert) {
+                if (requestData?.isConvert) {
                     return {
                         isConverted: true,
                         amount: response.rates.RUB * requestData.amount,
@@ -145,7 +152,7 @@ export const ConverterProvider = (props: PropsInterface) => {
 
         if (status === RequestStatuses.Succeeded) {
             setConvertingState((c) => {
-                if (requestData.isConvert) {
+                if (requestData?.isConvert) {
                     return {
                         isConverted: true,
                         amount: response.rates.USD * requestData.amount,
@@ -175,6 +182,7 @@ export const ConverterProvider = (props: PropsInterface) => {
                 onConvertBaseCurrency,
                 convertingState,
                 onCleanConvertingResult,
+                onLoadCurrencyRates,
             }}
         >
             {children}

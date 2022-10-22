@@ -54,7 +54,7 @@ const Sidebar: React.FC = () => {
                         href={CURRENCIES_LIST}
                     >
                         <a href={CURRENCIES_LIST} >
-                            {t('pages.currenciesList')}
+                            {t('pages.currenciesRates')}
                         </a>
                     </Link>
                 </Menu.Item>
